@@ -1,0 +1,110 @@
+#### Sudoku rows csv file
+
+
+# Below is a function that takes the list of individual strings created from the
+#  csv file opened and converts the individual string values to a list of integers
+#  and also converts the blank spaces to zeros to indicate that no known value exists
+#  at that position
+
+def integerList(n):
+    aList = []    
+    for i in range(0,len(n)):
+        if(n[i] == '1'): 
+            aList.append(1)
+        elif(n[i] == '2'):
+            aList.append(2)
+        elif(n[i] == '3'):
+            aList.append(3)
+        elif(n[i] == '4'):
+            aList.append(4)
+        elif(n[i] == '5'):
+            aList.append(5)
+        elif(n[i] == '6'):
+            aList.append(6)
+        elif(n[i] == '7'):
+            aList.append(7)
+        elif(n[i] == '8'):
+            aList.append(8)
+        elif(n[i] == '9'):
+            aList.append(9)
+        else:
+            aList.append(0)
+    return aList
+
+# Open the sudoku csv file with values listed by rows
+#  Format: single list
+#       -known values are listed as individual string values
+#       -unknown values are listed as blank string values
+print('\nPart 2')
+
+f = open('sudoku1.csv', 'r')
+valuesByRow = []
+for line in f:
+    myList = line.split(';')
+    for i in range(0,len(myList)):
+        myList[i] = myList[i].rstrip('\n')
+    valuesByRow.append(myList[0])
+    valuesByRow.append(myList[1])
+    valuesByRow.append(myList[2])
+    valuesByRow.append(myList[3])
+    valuesByRow.append(myList[4])
+    valuesByRow.append(myList[5])
+    valuesByRow.append(myList[6])
+    valuesByRow.append(myList[7])
+    valuesByRow.append(myList[8])
+f.close()
+
+print(valuesByRow)
+
+# Apply the function integerList to the valuesByRow list
+print('\nPart3')
+
+tempAllRows=integerList(valuesByRow)
+print(tempAllRows)
+
+
+# Parse the list allRows into 9 individual lists (one for each row)
+print('\nPart 4')
+
+row1 = tempAllRows[0:9]
+print(row1)
+row2 = tempAllRows[9:18]
+print(row2)
+row3 = tempAllRows[18:27]
+print(row3)
+row4 = tempAllRows[27:36]
+print(row4)
+row5 = tempAllRows[36:45]
+print(row5)
+row6 = tempAllRows[45:54]
+print(row6)
+row7 = tempAllRows[54:63]
+print(row7)
+row8 = tempAllRows[63:72]
+print(row8)
+row9 = tempAllRows[72:81]
+print(row9)    
+
+# Join the individual row lists of integer values into a single list so that each row
+#  is represented as a sublist of the main list 
+print('\nPart 5')
+
+allRows=([row1]+[row2]+[row3]+[row4]+[row5]+
+                  [row6]+[row7]+[row8]+[row9])
+print(allRows)
+
+# Create a csv file for the list of row lists and then open it without reformatting the file
+print('\nPart 6')
+
+f = open('sudokurowsFile.csv','w')
+for row in allRows:
+    for value in row:
+        f.write(str(value)+',')  # I can't figure out how to add the comma after all the values
+#                                  except the last vaule in the row
+    f.write('\n')
+f.close()
+
+f = open('sudokurowsFile.csv','r')
+print(f.read())
+f.close()
+
