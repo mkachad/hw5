@@ -72,7 +72,7 @@ class Sudokulist():
 
     #sudoku grid is a set of 9 sudoku lists
     #these 8 sudoku lists represent the 9 rows
-class Sudokugrid(self):
+class Sudokugrid():
     def __init__(self,list):
         self.list = list
 
